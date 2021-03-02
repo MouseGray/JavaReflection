@@ -1,9 +1,9 @@
 public class TestObject {
 
-    static final int h = 10;
+    public static final int h = 10;
 
-    int y;
-    String x;
+    public int y;
+    public String x;
 
     public TestObject(int r) {
 

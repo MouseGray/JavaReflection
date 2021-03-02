@@ -13,13 +13,13 @@ public class ReflectionInfo<A> {
     public void printFields(PrintStream printStream) {
         printStream.println("Fields:");
         for (Field field: clazz.getDeclaredFields()) {
-            printStream.println(Modifier.toString(field.getModifiers()) + " " + field.getType().getName() + " " +field.getName());
+            printStream.println(Modifier.toString(field.getModifiers()) + " " + field.getType().getName() + " " + field.getName());
         }
     }
 
     public void printConstructors(PrintStream printStream) {
         printStream.println("Constructors:");
-        for (Constructor constructor: clazz.getConstructors()) {
+        for (Constructor<?> constructor: clazz.getConstructors()) {
             printStream.println(Modifier.toString(constructor.getModifiers()) + " " + constructor.getName() + parametersToString(constructor));
         }
     }
@@ -35,6 +35,7 @@ public class ReflectionInfo<A> {
         for (Method m: clazz.getDeclaredMethods()) {
             if (m.getName().equals(method)) {
                 try {
+                    m.setAccessible(true);
                     m.invoke(obj, args);
                     return true;
                 }
